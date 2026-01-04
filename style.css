@@ -9,7 +9,7 @@ body {
   background: #0f0f0f;
   color: #f5f5f5;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden; /* No scrolling allowed */
   position: relative;
 }
 
@@ -23,16 +23,14 @@ body {
   z-index: 1; 
 }
 
-/* Center content */
+/* --- MAIN CONTENT (Text) --- */
 .content {
-  flex: 1;
+  flex: 1; /* This makes the text area grow to fill all empty space */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Keeps the text centered in the upper area */
   align-items: center;
   text-align: center;
-  /* Add padding so content doesn't hit the minion on small screens */
-  padding-bottom: 100px; 
 }
 
 h1 {
@@ -79,13 +77,13 @@ footer {
   text-align: center;
   font-size: 0.8rem;
   color: #777;
+  padding-bottom: 10px;
+  flex: 0 0 auto; /* Ensures footer stays at very bottom and doesn't squash */
 }
 
-/* --- SIDE WRAPPER (BOTTOM RIGHT) --- */
+/* --- SIDE WRAPPER (DESKTOP) --- */
 .side-wrapper {
     position: fixed;
-    
-    /* FORCE RIGHT POSITIONING */
     left: auto;   
     right: 30px;  
     bottom: 0px; 
@@ -105,15 +103,12 @@ footer {
     -webkit-backdrop-filter: blur(10px);
     padding: 16px 20px;
     border-radius: 16px;
-    
-    /* Make the bottom-right corner sharp to point at the Minion */
     border-bottom-right-radius: 4px; 
     
     max-width: 280px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* Push box up slightly so it sits near Minion's head */
     margin-bottom: 80px; 
     margin-right: -10px; 
     
@@ -142,7 +137,6 @@ footer {
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-/* Glorify Effect */
 .minion-note:hover .note-mail {
     color: #fff;
     text-shadow: 0 0 12px rgba(255, 213, 0, 0.8);
@@ -155,7 +149,6 @@ footer {
     height: 160px;
     pointer-events: auto;
     opacity: 0;
-    /* Pops up from bottom */
     animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
 }
 
@@ -181,49 +174,62 @@ footer {
 }
 
 .smile-face { opacity: 0; }
-
-/* Smile Logic */
 .minion-real-container.isSmiling .base-face { opacity: 0; }
 .minion-real-container.isSmiling .smile-face { opacity: 1; }
 
-/* --- RESPONSIVE DESIGN --- */
 
-/* Mobile & Tablet */
+/* =========================================
+   MOBILE FIXES (Max Width 768px)
+   ========================================= */
 @media (max-width: 768px) {
-  .side-wrapper {
-    /* Reset right/left to center it on mobile */
-    right: auto;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    
-    flex-direction: column-reverse; /* Box on top */
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
+  
+  .container {
+    height: 100dvh; /* Exact mobile screen height */
+    padding: 20px 20px 10px 20px;
+    /* This ensures layout is Top (Content) -> Bottom (Minion+Footer) */
+    justify-content: flex-end; 
   }
   
-  .minion-note {
-     margin-bottom: 10px;
-     margin-right: 0;
-     text-align: center;
-     border-bottom-right-radius: 16px; 
-     border-bottom-left-radius: 4px; /* Center pointer effect */
-     width: 90%;
+  /* 1. Push everything else to the bottom */
+  .content {
+    flex: 1; /* Takes ALL available upper space */
+    justify-content: center; /* Centers text vertically in that space */
+  }
+
+  /* 2. Minion & Box Formatting - Sits below content */
+  .side-wrapper {
+    position: relative; 
+    right: auto; left: auto; bottom: auto;
+    width: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+    flex: 0 0 auto; /* Do not grow or shrink */
+    margin-bottom: 5px; /* Tiny gap above copyright */
   }
 
   .minion-real-container {
-      width: 140px; 
-      height: 140px;
+      width: 120px;
+      height: 120px;
+      margin-left: -15px;
+  }
+
+  .minion-note {
+     margin-bottom: 35px; /* Align with Minion head */
+     margin-right: 0;
+     max-width: 60%; 
+     padding: 12px 14px;
+     font-size: 0.85rem;
+     border-bottom-right-radius: 4px; 
   }
   
-  .content {
-      justify-content: flex-start;
-      padding-top: 15vh; 
-  }
-}
+  .note-text br { display: none; } 
+  .note-mail { font-size: 0.75rem; word-break: break-all; } 
 
-@media (max-width: 480px) {
-  h1 { font-size: 1.8rem; }
-  .note-mail { font-size: 0.85rem; }
+  footer {
+     flex: 0 0 auto;
+     margin-top: 0;
+  }
 }
