@@ -1,6 +1,5 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { PortfolioProvider } from "@/context/PortfolioContext";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -27,84 +26,9 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Kaushal Ganatra — Software Engineer" },
-      {
-        name: "description",
-        content:
-          "Software Engineer building scalable web apps with .NET Core, React, and Golang. Backend, frontend, and AI-assisted development.",
-      },
-      { name: "author", content: "Kaushal Ganatra" },
-      { property: "og:title", content: "Kaushal Ganatra — Software Engineer" },
-      {
-        property: "og:description",
-        content: "Portfolio of Kaushal Ganatra — backend, frontend, and AI-assisted dev.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-    ],
-    links: [
-      {
-        rel: "icon",
-        type: "image/svg+xml",
-        href: `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23fbbf24'/><path d='M35 35L20 50L35 65M65 35L80 50L65 65M55 25L45 75' stroke='black' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>`,
-      },
-      { rel: "stylesheet", href: appCss },
-      {
-        rel: "preconnect",
-        href: "https://fonts.googleapis.com",
-      },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
-
-const themeInitScript = `
-(function () {
-  var t = localStorage.getItem('kg-theme') || 'dark';
-  var m = localStorage.getItem('kg-mode')  || 'pro';
-  var root = document.documentElement;
-  root.classList.add('no-transition');
-  root.classList.toggle('dark', t === 'dark');
-  root.classList.toggle('light', t === 'light');
-  root.classList.toggle('mode-personal', m === 'personal');
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      root.classList.remove('no-transition');
-    });
-  });
-})();
-`;
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-        {/* Inline blocking script — runs before first paint to avoid theme flash */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   return (
