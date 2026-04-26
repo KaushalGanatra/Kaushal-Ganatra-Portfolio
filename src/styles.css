@@ -1,0 +1,466 @@
+@import "tailwindcss" source(none);
+
+/* Suppress all transitions on initial theme stamp to prevent flash */
+.no-transition *,
+.no-transition *::before,
+.no-transition *::after {
+  transition: none !important;
+  animation: none !important;
+}
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Portfolio design system.
+ * Yellow-only palette with two shades:
+ *  - Pro mode = warm amber/gold (slightly orange-leaning)
+ *  - Personal mode = soft lemon (slightly green-leaning, lighter)
+ * Both light and dark themes are supported.
+ *
+ * Mode is toggled by adding `.mode-personal` to <html>; default is pro.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-faint: var(--faint);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+/* ============= PRO MODE — DARK (default) ============= */
+:root {
+  --radius: 0.875rem;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Warm amber / gold */
+  --primary: oklch(0.82 0.17 85);
+  --primary-foreground: oklch(0.18 0.04 80);
+  --primary-soft: oklch(0.82 0.17 85 / 0.12);
+  --primary-glow: oklch(0.88 0.16 88);
+
+  --background: oklch(0.16 0.018 85);
+  --foreground: oklch(0.98 0.01 90);
+  --surface: oklch(0.21 0.022 85);
+  --surface-2: oklch(0.27 0.028 85);
+
+  --card: oklch(0.21 0.022 85);
+  --card-foreground: oklch(0.98 0.01 90);
+  --popover: oklch(0.21 0.022 85);
+  --popover-foreground: oklch(0.98 0.01 90);
+
+  --secondary: oklch(0.27 0.028 85);
+  --secondary-foreground: oklch(0.98 0.01 90);
+  --muted: oklch(0.27 0.028 85);
+  --muted-foreground: oklch(0.7 0.04 85);
+  --accent: oklch(0.82 0.17 85 / 0.14);
+  --accent-foreground: oklch(0.82 0.17 85);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 90);
+
+  --border: oklch(0.82 0.17 85 / 0.14);
+  --border-strong: oklch(0.82 0.17 85 / 0.3);
+  --input: oklch(0.27 0.028 85);
+  --ring: oklch(0.82 0.17 85);
+  --faint: oklch(0.6 0.05 85);
+
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  --gradient-hero: radial-gradient(
+      circle at 20% 0%,
+      oklch(0.82 0.17 85 / 0.18),
+      transparent 50%
+    ),
+    radial-gradient(circle at 100% 100%, oklch(0.82 0.17 85 / 0.08), transparent 60%);
+  --shadow-elegant: 0 20px 50px -20px oklch(0.82 0.17 85 / 0.35);
+  --shadow-soft: 0 8px 24px -8px oklch(0 0 0 / 0.4);
+}
+
+/* PRO LIGHT */
+.light:root,
+:root.light {
+  --primary: oklch(0.7 0.16 75);
+  --primary-foreground: oklch(0.18 0.04 80);
+  --primary-soft: oklch(0.7 0.16 75 / 0.14);
+  --primary-glow: oklch(0.78 0.17 80);
+
+  --background: oklch(0.99 0.012 90);
+  --foreground: oklch(0.2 0.03 80);
+  --surface: oklch(0.97 0.018 90);
+  --surface-2: oklch(0.94 0.025 88);
+
+  --card: oklch(0.99 0.012 90);
+  --card-foreground: oklch(0.2 0.03 80);
+  --popover: oklch(0.99 0.012 90);
+  --popover-foreground: oklch(0.2 0.03 80);
+
+  --secondary: oklch(0.94 0.025 88);
+  --secondary-foreground: oklch(0.2 0.03 80);
+  --muted: oklch(0.94 0.025 88);
+  --muted-foreground: oklch(0.45 0.04 80);
+  --accent: oklch(0.7 0.16 75 / 0.14);
+  --accent-foreground: oklch(0.45 0.14 75);
+
+  --border: oklch(0.7 0.16 75 / 0.18);
+  --border-strong: oklch(0.7 0.16 75 / 0.36);
+  --input: oklch(0.97 0.018 90);
+  --ring: oklch(0.7 0.16 75);
+  --faint: oklch(0.55 0.05 80);
+
+  --shadow-elegant: 0 20px 50px -20px oklch(0.7 0.16 75 / 0.35);
+  --shadow-soft: 0 8px 24px -8px oklch(0.2 0.03 80 / 0.1);
+}
+
+/* ============= PERSONAL MODE — softer / lemon ============= */
+:root.mode-personal {
+  --primary: oklch(0.88 0.15 100);
+  --primary-foreground: oklch(0.18 0.03 100);
+  --primary-soft: oklch(0.88 0.15 100 / 0.14);
+  --primary-glow: oklch(0.93 0.13 105);
+
+  --background: oklch(0.16 0.014 100);
+  --foreground: oklch(0.98 0.01 100);
+  --surface: oklch(0.21 0.018 100);
+  --surface-2: oklch(0.27 0.024 100);
+
+  --card: oklch(0.21 0.018 100);
+  --card-foreground: oklch(0.98 0.01 100);
+  --popover: oklch(0.21 0.018 100);
+  --popover-foreground: oklch(0.98 0.01 100);
+
+  --secondary: oklch(0.27 0.024 100);
+  --muted: oklch(0.27 0.024 100);
+  --muted-foreground: oklch(0.7 0.04 100);
+  --accent: oklch(0.88 0.15 100 / 0.14);
+  --accent-foreground: oklch(0.88 0.15 100);
+
+  --border: oklch(0.88 0.15 100 / 0.14);
+  --border-strong: oklch(0.88 0.15 100 / 0.3);
+  --input: oklch(0.27 0.024 100);
+  --ring: oklch(0.88 0.15 100);
+  --faint: oklch(0.62 0.05 100);
+
+  --shadow-elegant: 0 20px 50px -20px oklch(0.88 0.15 100 / 0.35);
+}
+
+.light:root.mode-personal,
+:root.light.mode-personal {
+  --primary: oklch(0.78 0.15 100);
+  --primary-foreground: oklch(0.18 0.03 100);
+  --primary-soft: oklch(0.78 0.15 100 / 0.16);
+  --primary-glow: oklch(0.84 0.15 105);
+
+  --background: oklch(0.99 0.01 100);
+  --foreground: oklch(0.2 0.025 100);
+  --surface: oklch(0.97 0.018 100);
+  --surface-2: oklch(0.94 0.025 100);
+
+  --card: oklch(0.99 0.01 100);
+  --card-foreground: oklch(0.2 0.025 100);
+  --popover: oklch(0.99 0.01 100);
+  --popover-foreground: oklch(0.2 0.025 100);
+
+  --secondary: oklch(0.94 0.025 100);
+  --muted: oklch(0.94 0.025 100);
+  --muted-foreground: oklch(0.45 0.035 100);
+  --accent: oklch(0.78 0.15 100 / 0.14);
+  --accent-foreground: oklch(0.45 0.13 100);
+
+  --border: oklch(0.78 0.15 100 / 0.2);
+  --border-strong: oklch(0.78 0.15 100 / 0.4);
+  --input: oklch(0.97 0.018 100);
+  --ring: oklch(0.78 0.15 100);
+  --faint: oklch(0.55 0.045 100);
+
+  --shadow-elegant: 0 20px 50px -20px oklch(0.78 0.15 100 / 0.32);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
+  }
+
+  body {
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Reusable bits */
+.surface-panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+.surface-panel-2 {
+  background-color: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+.text-faint {
+  color: var(--color-faint);
+}
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+.hero-glow {
+  background-image: var(--gradient-hero);
+}
+.shadow-elegant {
+  box-shadow: var(--shadow-elegant);
+}
+
+/* ============================================================
+   Venetian-blind theme toggle
+   ============================================================ */
+.venetian-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px 0 6px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+.venetian-toggle:hover {
+  border-color: var(--color-primary);
+}
+
+.venetian-window {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 26px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1.5px oklch(0 0 0 / 0.4);
+}
+.venetian-frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 4px;
+  /* Subtle window cross — vertical mullion */
+  box-shadow:
+    inset 0 0 0 1px oklch(0 0 0 / 0.25),
+    inset -15px 0 0 -14px oklch(0 0 0 / 0.35);
+}
+.venetian-sky {
+  position: absolute;
+  inset: 0;
+  transition: background 0.7s ease;
+  background: linear-gradient(180deg, oklch(0.18 0.05 270), oklch(0.12 0.04 260));
+}
+.venetian-toggle.is-light .venetian-sky {
+  background: linear-gradient(180deg, oklch(0.88 0.08 230), oklch(0.94 0.05 90));
+}
+.venetian-celestial {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transition: all 0.7s ease;
+  background: radial-gradient(circle at 35% 35%, oklch(0.92 0.02 250), oklch(0.7 0.03 250));
+  box-shadow: inset -1px -1px 2px oklch(0 0 0 / 0.4);
+}
+.venetian-toggle.is-light .venetian-celestial {
+  background: radial-gradient(circle, oklch(0.96 0.18 90), oklch(0.82 0.18 75));
+  box-shadow: 0 0 8px oklch(0.85 0.18 85 / 0.9);
+}
+
+/* Slats: closed (dark) = flat horizontal solid wall covering the window.
+   Open (light) = tilted so sky shows through gaps. */
+.venetian-slats {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+.venetian-slat {
+  flex: 1;
+  transform-origin: center;
+  transform: rotateX(0deg);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(
+    180deg,
+    oklch(0.82 0.09 85) 0%,
+    oklch(0.7 0.08 82) 45%,
+    oklch(0.5 0.06 78) 50%,
+    oklch(0.7 0.08 82) 55%,
+    oklch(0.82 0.09 85) 100%
+  );
+  border-bottom: 1px solid oklch(0 0 0 / 0.22);
+}
+.venetian-toggle.is-light .venetian-slat {
+  transform: rotateX(78deg);
+}
+
+/* Pull cord, hangs to the right of the window */
+.venetian-cord-wrap {
+  position: relative;
+  display: block;
+  width: 4px;
+  height: 26px;
+}
+.venetian-cord {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 1.5px;
+  height: 18px;
+  background: oklch(0.7 0.05 85 / 0.8);
+  transform: translateX(-50%);
+  transform-origin: top center;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.venetian-knob {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 5px;
+  height: 8px;
+  border-radius: 2px;
+  background: oklch(0.7 0.07 85);
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.4);
+  transform: translateX(-50%);
+  transition: top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.venetian-toggle.is-dark .venetian-cord {
+  height: 18px;
+}
+.venetian-toggle.is-light .venetian-cord {
+  height: 10px;
+}
+.venetian-toggle.is-light .venetian-knob {
+  top: 8px;
+}
+
+/* Pulling animation — knob yanked downward, cord stretches, then snap-back via class removal */
+.venetian-toggle.is-pulling .venetian-cord {
+  height: 26px !important;
+  transition: height 0.18s ease-out;
+}
+.venetian-toggle.is-pulling .venetian-knob {
+  top: 24px !important;
+  transition: top 0.18s ease-out;
+}
+
+.venetian-hint {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-faint);
+  transition: color 0.25s;
+}
+.venetian-toggle:hover .venetian-hint {
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   Pro / Personal — Diagonal Curtain Wipe segmented toggle
+   ============================================================ */
+.mode-curtain-toggle .mft-opt {
+  padding: 8px 12px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-faint);
+}
+.mode-curtain-toggle .mft-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--color-border);
+}
+
+/* Active option = filled with current mode's primary tint */
+.mode-curtain-toggle.is-pro .mft-prof,
+.mode-curtain-toggle.is-personal .mft-pers {
+  background: var(--primary-soft);
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   Diagonal curtain wipe — full-viewport mode swap overlay
+   ============================================================ */
+.mode-wipe-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--color-background);
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+  transition: clip-path 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  overflow: hidden;
+}
+.mode-wipe-overlay.is-wiping {
+  clip-path: polygon(0 0, 150% 0, 0 150%, 0 0);
+}
+.mode-wipe-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hero);
+  opacity: 0.6;
+}
+
+
