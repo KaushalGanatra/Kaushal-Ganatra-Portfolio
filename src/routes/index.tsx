@@ -60,7 +60,7 @@ function ProfilePhoto() {
         />
       </div>
       <div className="absolute -bottom-2 -right-2 rounded-full bg-primary px-3 py-1 text-[10px] font-semibold text-primary-foreground shadow-lg">
-        Fullstack Software Engineer
+        Full-Stack Software Engineer
       </div>
     </motion.div>
   );
@@ -144,7 +144,7 @@ function ProHome() {
       */}
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="surface-panel p-5 md:p-6">
+        <div className="surface-panel min-w-0 p-5 md:p-6">
           <div className="mb-4 text-[10px] font-medium uppercase tracking-wider text-faint">
             Recent Experience
           </div>
@@ -152,13 +152,16 @@ function ProHome() {
             {experiences.slice(0, 3).map((e) => (
               <div
                 key={e.role + e.period}
-                className="flex gap-3 border-b border-border pb-3 last:border-none last:pb-0"
+                className="flex flex-col gap-1 border-b border-border pb-3 sm:flex-row sm:gap-3 last:border-none last:pb-0"
               >
-                <div className="min-w-[80px] pt-1 text-[11px] text-faint">{e.period}</div>
-                <div className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary" />
+                <div className="text-[11px] text-faint sm:min-w-[80px] sm:pt-1">{e.period}</div>
+                <div className="hidden mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-primary sm:block" />
                 <div className="min-w-0 flex-1">
-                  <div className="text-sm font-medium text-foreground">{e.role}</div>
-                  <div className="truncate text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+                    <span className="block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary sm:hidden" />
+                    {e.role}
+                  </div>
+                  <div className="text-xs text-muted-foreground line-clamp-2 sm:truncate sm:line-clamp-none">
                     {e.company}
                   </div>
                 </div>
@@ -167,7 +170,7 @@ function ProHome() {
           </div>
         </div>
 
-        <div className="surface-panel p-5 md:p-6">
+        <div className="surface-panel min-w-0 p-5 md:p-6">
           <div className="mb-4 text-[10px] font-medium uppercase tracking-wider text-faint">
             Top Tech
           </div>
