@@ -13,6 +13,7 @@ import {
   interests,
 } from "@/data/portfolio";
 import profileImg from "@/assets/profile.png";
+import profilePersonalImg from "@/assets/profile-personal.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,7 +52,7 @@ function ProfilePhoto({ mode }: { mode: string }) {
       <div className="absolute -inset-2 rounded-3xl bg-primary opacity-20 blur-2xl" />
       <div className="relative h-44 w-44 overflow-hidden rounded-3xl border-2 border-primary/40 shadow-elegant md:h-56 md:w-56">
         <img
-          src={profileImg}
+          src={mode === "pro" ? profileImg : profilePersonalImg}
           alt={`${profile.name} portrait`}
           className="h-full w-full object-cover"
           width={384}

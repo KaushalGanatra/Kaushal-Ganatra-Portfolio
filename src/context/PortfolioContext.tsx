@@ -25,9 +25,7 @@ function applyClasses(mode: Mode, theme: Theme) {
 }
 
 export function PortfolioProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<Mode>(
-    () => typeof window !== "undefined" ? (localStorage.getItem(MODE_KEY) as Mode) || "pro" : "pro"
-  );
+  const [mode, setModeState] = useState<Mode>("pro");
   const [theme, setThemeState] = useState<Theme>(
     () => typeof window !== "undefined" ? (localStorage.getItem(THEME_KEY) as Theme) || "dark" : "dark"
   );
