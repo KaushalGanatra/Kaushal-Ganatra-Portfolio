@@ -141,68 +141,71 @@
   --shadow-soft: 0 8px 24px -8px oklch(0.2 0.03 80 / 0.1);
 }
 
-/* ============= PERSONAL MODE — softer / lemon ============= */
+/* ============= PERSONAL MODE — Joyful Canary ============= */
 :root.mode-personal {
-  --primary: oklch(0.88 0.15 100);
-  --primary-foreground: oklch(0.18 0.03 100);
-  --primary-soft: oklch(0.88 0.15 100 / 0.14);
-  --primary-glow: oklch(0.93 0.13 105);
+  /* Light, joyful Canary Yellow (Shifted towards lemon/green to differ from Portfolio gold) */
+  --primary: oklch(0.92 0.2 105);
+  --primary-foreground: oklch(0.15 0.04 105);
+  --primary-soft: oklch(0.92 0.2 105 / 0.15);
+  --primary-glow: oklch(0.96 0.18 110);
 
-  --background: oklch(0.16 0.014 100);
-  --foreground: oklch(0.98 0.01 100);
-  --surface: oklch(0.21 0.018 100);
-  --surface-2: oklch(0.27 0.024 100);
+  /* Warm sun-tinted dark (Avoids blue/cool tones completely) */
+  --background: oklch(0.14 0.015 105);
+  --foreground: oklch(0.98 0.01 105);
+  --surface: oklch(0.18 0.02 105);
+  --surface-2: oklch(0.24 0.03 105);
 
-  --card: oklch(0.21 0.018 100);
-  --card-foreground: oklch(0.98 0.01 100);
-  --popover: oklch(0.21 0.018 100);
-  --popover-foreground: oklch(0.98 0.01 100);
+  --card: oklch(0.18 0.02 105);
+  --card-foreground: oklch(0.98 0.01 105);
+  --popover: oklch(0.18 0.02 105);
+  --popover-foreground: oklch(0.98 0.01 105);
 
-  --secondary: oklch(0.27 0.024 100);
-  --muted: oklch(0.27 0.024 100);
-  --muted-foreground: oklch(0.7 0.04 100);
-  --accent: oklch(0.88 0.15 100 / 0.14);
-  --accent-foreground: oklch(0.88 0.15 100);
+  --secondary: oklch(0.24 0.03 105);
+  --muted: oklch(0.24 0.03 105);
+  --muted-foreground: oklch(0.65 0.04 105);
+  --accent: oklch(0.92 0.2 105 / 0.18);
+  --accent-foreground: oklch(0.92 0.2 105);
 
-  --border: oklch(0.88 0.15 100 / 0.14);
-  --border-strong: oklch(0.88 0.15 100 / 0.3);
-  --input: oklch(0.27 0.024 100);
-  --ring: oklch(0.88 0.15 100);
-  --faint: oklch(0.62 0.05 100);
+  --border: oklch(0.92 0.2 105 / 0.15);
+  --border-strong: oklch(0.92 0.2 105 / 0.35);
+  --input: oklch(0.24 0.03 105);
+  --ring: oklch(0.92 0.2 105);
+  --faint: oklch(0.6 0.05 105);
 
-  --shadow-elegant: 0 20px 50px -20px oklch(0.88 0.15 100 / 0.35);
+  --shadow-elegant: 0 20px 50px -15px oklch(0.92 0.2 105 / 0.4);
 }
 
 .light:root.mode-personal,
 :root.light.mode-personal {
-  --primary: oklch(0.78 0.15 100);
-  --primary-foreground: oklch(0.18 0.03 100);
-  --primary-soft: oklch(0.78 0.15 100 / 0.16);
-  --primary-glow: oklch(0.84 0.15 105);
+  /* Bright Sunshine Light */
+  --primary: oklch(0.85 0.18 105);
+  --primary-foreground: oklch(0.15 0.04 105);
+  --primary-soft: oklch(0.85 0.18 105 / 0.18);
+  --primary-glow: oklch(0.9 0.15 110);
 
-  --background: oklch(0.99 0.01 100);
-  --foreground: oklch(0.2 0.025 100);
-  --surface: oklch(0.97 0.018 100);
-  --surface-2: oklch(0.94 0.025 100);
+  --background: oklch(0.99 0.03 105);
+  --foreground: oklch(0.15 0.04 105);
+  --surface: oklch(0.97 0.04 105);
+  --surface-2: oklch(0.94 0.05 105);
 
-  --card: oklch(0.99 0.01 100);
-  --card-foreground: oklch(0.2 0.025 100);
-  --popover: oklch(0.99 0.01 100);
-  --popover-foreground: oklch(0.2 0.025 100);
+  --card: oklch(0.99 0.03 105);
+  --card-foreground: oklch(0.15 0.04 105);
+  --popover: oklch(0.99 0.03 105);
+  --popover-foreground: oklch(0.15 0.04 105);
 
-  --secondary: oklch(0.94 0.025 100);
-  --muted: oklch(0.94 0.025 100);
-  --muted-foreground: oklch(0.45 0.035 100);
-  --accent: oklch(0.78 0.15 100 / 0.14);
-  --accent-foreground: oklch(0.45 0.13 100);
+  --secondary: oklch(0.94 0.05 105);
+  --muted: oklch(0.94 0.05 105);
+  --muted-foreground: oklch(0.45 0.07 105);
+  --accent: oklch(0.85 0.18 105 / 0.16);
+  --accent-foreground: oklch(0.45 0.15 105);
 
-  --border: oklch(0.78 0.15 100 / 0.2);
-  --border-strong: oklch(0.78 0.15 100 / 0.4);
-  --input: oklch(0.97 0.018 100);
-  --ring: oklch(0.78 0.15 100);
-  --faint: oklch(0.55 0.045 100);
+  --border: oklch(0.85 0.18 105 / 0.22);
+  --border-strong: oklch(0.85 0.18 105 / 0.45);
+  --input: oklch(0.97 0.04 105);
+  --ring: oklch(0.85 0.18 105);
+  --faint: oklch(0.55 0.07 105);
 
-  --shadow-elegant: 0 20px 50px -20px oklch(0.78 0.15 100 / 0.32);
+  --shadow-elegant: 0 20px 50px -20px oklch(0.85 0.18 105 / 0.35);
 }
 
 @layer base {
@@ -427,40 +430,77 @@
   background: transparent;
   color: var(--color-faint);
 }
-.mode-curtain-toggle .mft-divider {
-  width: 1px;
-  align-self: stretch;
-  background: var(--color-border);
-}
+/* Divider removed in favor of sliding pill */
 
-/* Active option = filled with current mode's primary tint */
-.mode-curtain-toggle.is-pro .mft-prof,
-.mode-curtain-toggle.is-personal .mft-pers {
-  background: var(--primary-soft);
-  color: var(--color-primary);
-}
+/* Active option = primary tint for icons/text handled via inline classes */
 
 /* ============================================================
    Diagonal curtain wipe — full-viewport mode swap overlay
    ============================================================ */
-.mode-wipe-overlay {
+/* ============================================================
+   Heavy Gravity Drop mode swap overlay
+   ============================================================ */
+.mode-drop-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background: var(--color-background);
-  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-  transition: clip-path 0.85s cubic-bezier(0.76, 0, 0.24, 1);
-  overflow: hidden;
+  z-index: 100;
+  transform: translateY(-100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid var(--primary);
+  box-shadow: 0 0 100px rgba(0,0,0,0.5);
 }
-.mode-wipe-overlay.is-wiping {
-  clip-path: polygon(0 0, 150% 0, 0 150%, 0 0);
+
+.mode-drop-overlay.is-dropping {
+  animation: shutter-drop 1.2s cubic-bezier(0.85, 0, 0.15, 1) forwards;
 }
-.mode-wipe-overlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-hero);
-  opacity: 0.6;
+
+@keyframes shutter-drop {
+  0% { transform: translateY(-100%); }
+  45%, 55% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
 }
+
+.drop-content {
+  text-align: center;
+}
+
+.drop-line {
+  height: 2px;
+  width: 100px;
+  background: var(--primary);
+  margin: 20px auto;
+  transform: scaleX(0);
+}
+
+.mode-drop-overlay.is-dropping .drop-line {
+  animation: line-grow 0.4s 0.4s ease forwards;
+}
+
+@keyframes line-grow {
+  to { transform: scaleX(1); }
+}
+
+.drop-text {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--foreground);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.mode-drop-overlay.is-dropping .drop-text {
+  animation: text-pop 0.3s 0.5s ease forwards;
+}
+
+@keyframes text-pop {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 

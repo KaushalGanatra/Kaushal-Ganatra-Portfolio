@@ -44,17 +44,14 @@ function ExperienceCard({ e, index }: { e: (typeof experiences)[number]; index: 
 
       {/* Card */}
       <div className="mb-6 min-w-0 flex-1 pb-1">
-        <button
+        {/* <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           className="w-full text-left"
           aria-expanded={open}
-        >
+        > */}
           <div
-            className={`surface-panel cursor-pointer rounded-xl border p-4 transition-all sm:p-5 ${open
-                ? "border-primary/40 shadow-lg"
-                : "border-border hover:border-primary/30 hover:shadow-md"
-              }`}
+            className={`surface-panel rounded-xl border p-4 transition-all sm:p-5 border-border hover:border-primary/30 hover:shadow-md`}
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
@@ -72,23 +69,23 @@ function ExperienceCard({ e, index }: { e: (typeof experiences)[number]; index: 
                 <div className="mt-0.5 text-sm text-primary">{e.company}</div>
                 <div className="mt-0.5 text-xs text-faint">{e.location}</div>
               </div>
-              <div
+              {/* <div
                 className={`mt-1 flex-shrink-0 rounded-full border border-border bg-surface-2 p-1 transition-transform ${open ? "rotate-180" : ""
                   }`}
               >
                 <ChevronDown size={14} className="text-muted-foreground" />
-              </div>
+              </div> */}
             </div>
 
-            {!open && (
+            {/* {!open && (
               <p className="mt-2 text-xs text-faint italic">
                 Click to see what I built here →
               </p>
-            )}
+            )} */}
           </div>
-        </button>
+        {/* </button> */}
 
-        <AnimatePresence initial={false}>
+        {/* <AnimatePresence initial={false}>
           {open && (
             <motion.div
               key="details"
@@ -108,7 +105,7 @@ function ExperienceCard({ e, index }: { e: (typeof experiences)[number]; index: 
               </ul>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
     </div>
   );

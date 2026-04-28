@@ -31,7 +31,7 @@ export const profile = {
     "Software Engineer with hands-on experience designing and developing scalable web applications using .NET Core, React.js, and Golang. Strong foundation in backend systems, RESTful APIs, and database design, with practical exposure to DevOps practices including Docker, CI/CD, and Terraform.",
 };
 
-export type NavItem = { id: string; label: string; icon: LucideIcon; to: string };
+export type NavItem = { id: string; label: string; icon: LucideIcon; to: string; locked?: boolean };
 
 export const PRO_NAV: NavItem[] = [
   { id: "home", label: "Home", icon: Home, to: "/" },
@@ -46,10 +46,8 @@ export const PRO_NAV: NavItem[] = [
 
 export const PER_NAV: NavItem[] = [
   { id: "home", label: "Home", icon: Home, to: "/" },
-  { id: "writing", label: "Writing", icon: PenLine, to: "/writing" },
-  { id: "education", label: "Education", icon: GraduationCap, to: "/education" },
-  { id: "gallery", label: "Gallery", icon: ImageIcon, to: "/gallery" },
-  { id: "contact", label: "Contact", icon: Mail, to: "/contact" },
+  { id: "writing", label: "Writing", icon: PenLine, to: "/writing", locked: true },
+  { id: "gallery", label: "Gallery", icon: ImageIcon, to: "/gallery", locked: true },
 ];
 
 export const stats = [
@@ -71,7 +69,7 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     period: "Nov 2024 – Present",
-    role: "Software Engineer",
+    role: "Full-Stack Software Developer",
     company: "ez enRoute Pvt. Ltd. (Acquired by Zonar Systems, USA)",
     location: "Rajkot, India · International Exposure",
     current: true,
@@ -352,11 +350,11 @@ export const currently = {
 };
 
 export const interests = [
-  "system design",
-  "AI-assisted dev",
-  "open-source",
-  "books",
-  "travel",
+  "psychology",
   "writing",
-  "tea",
+  "travel",
+  "blogs",
+  "vlogs",
+  "AI",
+  "Dance",
 ];

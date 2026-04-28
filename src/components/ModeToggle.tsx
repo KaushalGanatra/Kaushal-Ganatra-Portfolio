@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Briefcase, Coffee } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePortfolio } from "@/context/PortfolioContext";
 
 /**
@@ -20,8 +21,22 @@ export function ModeToggle() {
   const switchTo = (next: "pro" | "personal") => {
     if (next === mode || wiping) return;
     setWiping(next);
-    window.setTimeout(() => setMode(next), 380);
-    window.setTimeout(() => setWiping(null), 950);
+
+    // Disable transitions while the drop is active.
+    document.documentElement.classList.add("no-transition");
+
+    // Change mode in the middle of the drop (when it fully covers the screen).
+    window.setTimeout(() => {
+      startTransition(() => {
+        setMode(next);
+      });
+    }, 600);
+
+    // Clean up.
+    window.setTimeout(() => {
+      setWiping(null);
+      document.documentElement.classList.remove("no-transition");
+    }, 1300);
   };
 
   const isPro = mode === "pro";
@@ -31,49 +46,69 @@ export function ModeToggle() {
       <div
         role="group"
         aria-label="Switch portfolio mode"
-        className={`mode-curtain-toggle flex items-stretch overflow-hidden rounded-lg border border-border-strong bg-surface ${
-          isPro ? "is-pro" : "is-personal"
-        }`}
+        className="mode-curtain-toggle relative flex items-center rounded-lg border border-border-strong bg-surface p-1.5"
       >
         <button
           type="button"
           onClick={() => switchTo("pro")}
           aria-pressed={isPro}
-          className="mft-opt mft-prof flex items-center justify-center gap-1.5"
+          className={`relative flex h-8 flex-1 items-center justify-center gap-2 rounded-md px-3 text-xs font-bold uppercase tracking-wider transition-colors duration-200 ${
+            isPro ? "text-primary-foreground" : "text-faint hover:text-foreground"
+          }`}
         >
-          <Briefcase size={12} />
-          <span className="hidden sm:inline">Portfolio</span>
+          {isPro && (
+            <motion.div
+              layoutId="toggle-pill"
+              className="absolute inset-0 z-0 rounded-md bg-primary shadow-sm"
+              transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+            />
+          )}
+          <Briefcase size={13} className="relative z-10" />
+          <span className="relative z-10 hidden sm:inline">Portfolio</span>
         </button>
-        <span aria-hidden className="mft-divider" />
+
         <button
           type="button"
           onClick={() => switchTo("personal")}
           aria-pressed={!isPro}
-          className="mft-opt mft-pers flex items-center justify-center gap-1.5"
+          className={`relative flex h-8 flex-1 items-center justify-center gap-2 rounded-md px-3 text-xs font-bold uppercase tracking-wider transition-colors duration-200 ${
+            !isPro ? "text-primary-foreground" : "text-faint hover:text-foreground"
+          }`}
         >
-          <Coffee size={12} />
-          <span className="hidden sm:inline">Personal</span>
+          {!isPro && (
+            <motion.div
+              layoutId="toggle-pill"
+              className="absolute inset-0 z-0 rounded-md bg-primary shadow-sm"
+              transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+            />
+          )}
+          <Coffee size={13} className="relative z-10" />
+          <span className="relative z-10 hidden sm:inline">Personal</span>
         </button>
       </div>
 
       {wiping &&
         target &&
         createPortal(
-          <div className={`${theme} ${wiping === "personal" ? "mode-personal" : ""} h-full w-full`}>
-            <div
-              className="mode-wipe-overlay"
-              aria-hidden
-              ref={(el) => {
-                if (!el) return;
-                el.classList.remove("is-wiping");
-                requestAnimationFrame(() => {
-                  requestAnimationFrame(() => el.classList.add("is-wiping"));
-                });
-              }}
-            />
-          </div>,
+          <DropOverlay mode={wiping} theme={theme} />,
           target,
         )}
     </>
+  );
+}
+
+/**
+ * Heavy shutter-drop transition.
+ */
+function DropOverlay({ mode, theme }: { mode: string; theme: string }) {
+  return (
+    <div className={`${theme} ${mode === "personal" ? "mode-personal" : ""} h-full w-full`}>
+      <div className="mode-drop-overlay is-dropping" aria-hidden>
+        <div className="drop-content">
+          <div className="drop-text">{mode === "pro" ? "INITIALIZING_PRO" : "SWITCHING_PERSONAL"}</div>
+          <div className="drop-line" />
+        </div>
+      </div>
+    </div>
   );
 }

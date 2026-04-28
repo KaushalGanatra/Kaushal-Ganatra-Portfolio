@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Sparkles, MapPin } from "lucide-react";
 import { AppLayout } from "@/components/AppLayout";
-// import { usePortfolio } from "@/context/PortfolioContext"; // COMMENTED OUT: no longer needed while toggle is disabled
+import { usePortfolio } from "@/context/PortfolioContext";
 import {
   profile,
   stats,
@@ -34,14 +34,13 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
-  // const { mode } = usePortfolio(); // COMMENTED OUT: Portfolio/Personal toggle — always show Portfolio (pro) mode
+  const { mode } = usePortfolio();
   return (
-    <AppLayout><ProHome /></AppLayout>
-    // {/* <AppLayout>{mode === "pro" ? <ProHome /> : <PersonalHome />}</AppLayout> */}
+    <AppLayout>{mode === "pro" ? <ProHome /> : <PersonalHome />}</AppLayout>
   );
 }
 
-function ProfilePhoto() {
+function ProfilePhoto({ mode }: { mode: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -60,7 +59,7 @@ function ProfilePhoto() {
         />
       </div>
       <div className="absolute -bottom-2 -right-2 rounded-full bg-primary px-3 py-1 text-[10px] font-semibold text-primary-foreground shadow-lg">
-        Full-Stack Software Engineer
+        {mode === "pro" ? "Full-Stack Software Engineer" : "Curious Human"}
       </div>
     </motion.div>
   );
@@ -71,7 +70,7 @@ function ProHome() {
     <div className="space-y-5">
       <div className="surface-panel hero-glow relative overflow-hidden p-6 md:p-10">
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-10">
-          <ProfilePhoto />
+          <ProfilePhoto mode="pro" />
           <div className="min-w-0 flex-1 text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
@@ -201,7 +200,7 @@ function PersonalHome() {
     <div className="space-y-5">
       <div className="surface-panel hero-glow p-6 md:p-10">
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-10">
-          <ProfilePhoto />
+          <ProfilePhoto mode="personal" />
           <div className="min-w-0 flex-1 text-center md:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
@@ -214,8 +213,7 @@ function PersonalHome() {
             </motion.h1>
             <p className="mx-auto mt-4 max-w-lg text-sm text-muted-foreground md:mx-0 md:text-base">
               Outside work I read, write, and chase ideas across psychology, philosophy,
-              and the craft of building things. Gold Medalist in BCA — but luck and
-              curiosity, not just effort.
+              and the craft of building things.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-2 md:justify-start">
               {interests.map((i) => (
@@ -236,6 +234,30 @@ function PersonalHome() {
           <div className="mb-4 text-[10px] font-medium uppercase tracking-wider text-faint">
             Recent Writing
           </div>
+          <div className="flex min-h-[120px] flex-col items-center justify-center py-6 text-center">
+            <div className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
+              Still writing
+              <span className="flex gap-1 px-1">
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, delay: 0 }}
+                  className="h-1 w-1 rounded-full bg-primary"
+                />
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, delay: 0.3 }}
+                  className="h-1 w-1 rounded-full bg-primary"
+                />
+                <motion.span
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, delay: 0.6 }}
+                  className="h-1 w-1 rounded-full bg-primary"
+                />
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-faint italic">Curating thoughts on code and life.</p>
+          </div>
+          {/* COMMENTED OUT: Recent Writing items
           {personalWriting.slice(0, 3).map((p) => (
             <div
               key={p.title}
@@ -248,11 +270,36 @@ function PersonalHome() {
               <div className="mt-0.5 text-xs text-faint">{p.meta}</div>
             </div>
           ))}
+          */}
         </div>
         <div className="surface-panel p-5 md:p-6">
           <div className="mb-4 text-[10px] font-medium uppercase tracking-wider text-faint">
             Currently
           </div>
+          <div className="flex min-h-[120px] flex-col items-center justify-center py-6 text-center">
+            <div className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
+              Building section
+              <span className="flex gap-1 px-1">
+                <motion.span
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 1.2, delay: 0 }}
+                  className="h-1 w-1 rounded-full bg-primary"
+                />
+                <motion.span
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 1.2, delay: 0.2 }}
+                  className="h-1 w-1 rounded-full bg-primary"
+                />
+                <motion.span
+                  animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ repeat: Infinity, duration: 1.2, delay: 0.4 }}
+                  className="h-1 w-1 rounded-full bg-primary"
+                />
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-faint italic">Live updates coming soon.</p>
+          </div>
+          {/* COMMENTED OUT: Currently items
           <div className="space-y-3 text-sm">
             <div className="flex justify-between gap-3">
               <span className="text-faint">Reading</span>
@@ -271,6 +318,7 @@ function PersonalHome() {
               <span className="text-right text-foreground">{currently.building}</span>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>

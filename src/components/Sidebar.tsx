@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Github, Linkedin, Mail, X } from "lucide-react";
+import { Github, Linkedin, Mail, X, Lock } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { PRO_NAV, PER_NAV, profile } from "@/data/portfolio";
 
@@ -53,8 +53,27 @@ export function Sidebar({ open = false, onClose }: Props) {
             {nav.map((item) => {
               const Icon = item.icon;
               const active =
+                !item.locked && (
                 location.pathname === item.to ||
-                (item.to !== "/" && location.pathname.startsWith(item.to));
+                (item.to !== "/" && location.pathname.startsWith(item.to)));
+
+              if (item.locked) {
+                return (
+                  <li key={item.id}>
+                    <div
+                      className="flex cursor-not-allowed items-center justify-between rounded-lg px-3 py-2 text-sm text-faint/50 transition-colors"
+                      title="Coming soon"
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon size={15} />
+                        {item.label}
+                      </div>
+                      <Lock size={12} className="opacity-60" />
+                    </div>
+                  </li>
+                );
+              }
+
               return (
                 <li key={item.id}>
                   <Link

@@ -23,13 +23,11 @@ export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
           <Menu size={16} />
         </button>
         <div className="text-xs text-faint">
-          portfolio / <span className="text-foreground">{label}</span>
+          {mode === "pro" ? "portfolio" : "personal"} / <span className="text-foreground">{label}</span>
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {/* COMMENTED OUT: Portfolio/Personal toggle
         <ModeToggle />
-        */}
         <ThemeToggle />
         <a
           href="/Kaushal_Ganatra_CV.pdf"

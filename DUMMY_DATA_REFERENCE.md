@@ -48,3 +48,7 @@ Replace with a real photo (same dimensions ideally) when ready.
 
 `public/Kaushal_Ganatra_CV.pdf` is the real CV provided. The Download Resume
 button serves this file. Replace it with a newer version when the CV updates.
+
+## Removed / Hidden for now
+
+- **Experience Card Details**: The detail lists (what was built/achieved) that open on clicking the timeline cards in `src/routes/experience.tsx` have been commented out. They are still in the code and can be uncommented to restore the interaction.
