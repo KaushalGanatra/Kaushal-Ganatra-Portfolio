@@ -16,6 +16,7 @@ import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as EducationRouteImport } from './routes/education'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ClientWorkRouteImport } from './routes/client-work'
 import { Route as BusinessesRouteImport } from './routes/businesses'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
@@ -55,6 +56,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClientWorkRoute = ClientWorkRouteImport.update({
+  id: '/client-work',
+  path: '/client-work',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BusinessesRoute = BusinessesRouteImport.update({
   id: '/businesses',
   path: '/businesses',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/businesses': typeof BusinessesRoute
+  '/client-work': typeof ClientWorkRoute
   '/contact': typeof ContactRoute
   '/education': typeof EducationRoute
   '/experience': typeof ExperienceRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/businesses': typeof BusinessesRoute
+  '/client-work': typeof ClientWorkRoute
   '/contact': typeof ContactRoute
   '/education': typeof EducationRoute
   '/experience': typeof ExperienceRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/businesses': typeof BusinessesRoute
+  '/client-work': typeof ClientWorkRoute
   '/contact': typeof ContactRoute
   '/education': typeof EducationRoute
   '/experience': typeof ExperienceRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/businesses'
+    | '/client-work'
     | '/contact'
     | '/education'
     | '/experience'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/businesses'
+    | '/client-work'
     | '/contact'
     | '/education'
     | '/experience'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/businesses'
+    | '/client-work'
     | '/contact'
     | '/education'
     | '/experience'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   BusinessesRoute: typeof BusinessesRoute
+  ClientWorkRoute: typeof ClientWorkRoute
   ContactRoute: typeof ContactRoute
   EducationRoute: typeof EducationRoute
   ExperienceRoute: typeof ExperienceRoute
@@ -211,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/client-work': {
+      id: '/client-work'
+      path: '/client-work'
+      fullPath: '/client-work'
+      preLoaderRoute: typeof ClientWorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/businesses': {
       id: '/businesses'
       path: '/businesses'
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   BusinessesRoute: BusinessesRoute,
+  ClientWorkRoute: ClientWorkRoute,
   ContactRoute: ContactRoute,
   EducationRoute: EducationRoute,
   ExperienceRoute: ExperienceRoute,

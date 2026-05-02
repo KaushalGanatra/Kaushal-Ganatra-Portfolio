@@ -37,7 +37,7 @@ export const PRO_NAV: NavItem[] = [
   { id: "home", label: "Home", icon: Home, to: "/" },
   { id: "experience", label: "Experience", icon: Briefcase, to: "/experience" },
   { id: "technologies", label: "Technologies", icon: Code2, to: "/technologies" },
-  // COMMENTED OUT: { id: "businesses", label: "Businesses", icon: Building2, to: "/businesses" },
+  { id: "client-work", label: "Client Work", icon: Building2, to: "/client-work" },
   // COMMENTED OUT: { id: "blog", label: "Tech Blog", icon: PenLine, to: "/blog" },
   // COMMENTED OUT: { id: "gallery", label: "Gallery", icon: ImageIcon, to: "/gallery" },
   // COMMENTED OUT: { id: "legends", label: "Unsung Legends", icon: Star, to: "/legends" },
@@ -357,4 +357,36 @@ export const interests = [
   "vlogs",
   "AI",
   "Dance",
+];
+
+export type ClientWork = {
+  name: string;
+  logo: string;
+  fullBleedLogo?: boolean;
+  link?: string;
+  projectType: string;
+  description: string;
+  isPrivate: boolean;
+  techStack: string[];
+};
+
+export const clientWorks: ClientWork[] = [
+  {
+    name: "Unfiltered gup-shuP",
+    logo: "/client/unfiltered.jpg",
+    fullBleedLogo: true,
+    projectType: "Freelance Project",
+    description: "Worked on building a digital platform for a Delhi-based open-mic startup, helping establish their online presence and showcase events.",
+    isPrivate: false,
+    techStack: ["WordPress", "Elementor", "PHP"]
+  },
+  {
+    name: "Coussinet Engineers",
+    logo: "/client/coussinet.png",
+    link: "https://coussinet.com/",
+    projectType: "Collaboration",
+    description: "Contributed to the development of a modern web platform for a precision engineering company, focusing on frontend implementation and user experience.",
+    isPrivate: false,
+    techStack: ["React", "Tailwind CSS", "Frontend Development"]
+  }
 ];
