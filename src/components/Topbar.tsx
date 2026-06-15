@@ -3,7 +3,6 @@ import { Download, Menu } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { PRO_NAV, PER_NAV } from "@/data/portfolio";
 import { ThemeToggle } from "./ThemeToggle";
-import { ModeToggle } from "./ModeToggle";
 
 export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
   const { mode } = usePortfolio();
@@ -27,7 +26,6 @@ export function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <ModeToggle />
         <ThemeToggle />
         <a
           href="/Kaushal_Ganatra_CV.pdf"
