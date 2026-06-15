@@ -388,5 +388,15 @@ export const clientWorks: ClientWork[] = [
     description: "Contributed to the development of a modern web platform for a precision engineering company, focusing on frontend implementation and user experience.",
     isPrivate: false,
     techStack: ["React", "Tailwind CSS", "Frontend Development"]
+  },
+  {
+    name: "Sukan Staffings",
+    logo: "/client/sukan.jpeg",
+    link: "https://sukanstaffings.com/",
+    projectType: "Freelance Project",
+    description: "Developed a modern digital platform for a U.S. career placement expert, connecting ambitious job seekers with top employers and offering interview coaching.",
+    isPrivate: false,
+    techStack: ["React", "Vite", "Frontend Development"]
   }
 ];
+
