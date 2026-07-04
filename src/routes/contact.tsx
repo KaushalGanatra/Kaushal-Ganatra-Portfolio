@@ -27,17 +27,45 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
-      toast.error("Please fill all fields");
+      toast.error("Please fill in all fields");
       return;
     }
-    const subject = encodeURIComponent(`Portfolio: message from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    toast.success("Opening your email client…");
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch("/.netlify/functions/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast.success(data.message || "Message sent successfully!");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        toast.error(data.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error("An error occurred while sending your message.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -80,9 +108,10 @@ function ContactPage() {
             </div>
             <button
               type="submit"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              disabled={loading}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Send size={14} /> Send Message
+              <Send size={14} /> {loading ? "Sending..." : "Send Message"}
             </button>
           </form>
         </Panel>
